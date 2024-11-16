@@ -52,9 +52,9 @@ if uploaded_files:
         with open(tempfile,'wb') as file:
             file.write(upladed_file.getvalue())
             file_name=upladed_file.name
-            loader=PyPDFLoader(tempfile)
-            docs=loader.load()
-            documents.extend(docs)
+        loader=PyPDFLoader(tempfile)
+        docs=loader.load()
+        documents.extend(docs)
     text_splitter=RecursiveCharacterTextSplitter(chunk_size=5000,chunk_overlap=500)
     splits=text_splitter.split_documents(documents)
     vectorstore=FAISS.from_documents(documents=splits,embedding=HuggingFaceEmbeddings(model_name='all-MiniLM-L6-v2'))
